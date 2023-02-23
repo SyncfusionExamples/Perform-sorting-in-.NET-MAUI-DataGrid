@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:data="clr-namespace:Syncfusion.Maui.Data;assembly=Syncfusion.Maui.Data"
+             xmlns:local="clr-namespace:MAUI_DataGrid_Sorting"
+             x:Class="MAUI_DataGrid_Sorting.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:OrderInfoRepo />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <local:CustomSortComparer x:Key="comparer" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <syncfusion:SfDataGrid ItemsSource="{Binding Orders}"
+                               AutoGenerateColumnsMode="None"
+                               GridLinesVisibility="Both"
+                               HeaderGridLinesVisibility="Both"
+                               ColumnWidthMode="FitByHeader"
+                               SortingMode="Multiple"
+                               AllowTriStateSorting="True"
+                               ShowSortNumbers="True"
+                               SortingGestureType="Tap">
+
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:DataGridTextColumn MappingName="OrderID"
+                                               HeaderText="Order ID"></syncfusion:DataGridTextColumn>
+                <syncfusion:DataGridTextColumn MappingName="CustomerID"
+                                               HeaderText="Customer ID"
+                                               AllowSorting="True"></syncfusion:DataGridTextColumn>
+                <syncfusion:DataGridTextColumn MappingName="Customer"
+                                               HeaderText="Name"></syncfusion:DataGridTextColumn>
+                <syncfusion:DataGridTextColumn MappingName="ShipCountry"
+                                               HeaderText="Country"></syncfusion:DataGridTextColumn>
+            </syncfusion:SfDataGrid.Columns>
+
+            <!--Sort columns by custom logic-->
+            <!--
+            <syncfusion:SfDataGrid.SortComparers>
+                <data:SortComparer Comparer="{StaticResource comparer}" PropertyName="Customer" />
+            </syncfusion:SfDataGrid.SortComparers>-->
+
+            <syncfusion:SfDataGrid.SortColumnDescriptions>
+                <syncfusion:SortColumnDescription ColumnName="CustomerID" SortDirection="Ascending"/>
+            </syncfusion:SfDataGrid.SortColumnDescriptions>
+
+        </syncfusion:SfDataGrid>
+    </ContentPage.Content>
+
+</ContentPage>
